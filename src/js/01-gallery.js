@@ -1,10 +1,10 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-const galleryContainer = document.querySelector('.gallery');
+const galleryContainer = document.querySelector(".gallery");
 const itemsMarkup = createGalleryItems(galleryItems);
 
-galleryContainer.insertAdjacentHTML('beforeend', itemsMarkup);
-galleryContainer.addEventListener('click',onGalleryContainerClick);
+galleryContainer.insertAdjacentHTML("beforeend", itemsMarkup);
+galleryContainer.addEventListener("click", onGalleryContainerClick);
 
 function createGalleryItems(galleryItems) {
   return galleryItems
@@ -21,11 +21,21 @@ function createGalleryItems(galleryItems) {
   </div>`;
     })
     .join("");
-};
-function onGalleryContainerClick(evt){
-  
+}
+function onGalleryContainerClick(evt) {
+  const isGalleryImageEl = evt.target.classList.contains("gallery__image");
+  if (!isGalleryImageEl) {
+    return;
+  }
+  evt.preventDafault();
 }
 
+function onEscKeyPress(evt) {
+  const ESC_KEY_CODE = "Escape";
+  if (evt.code === ESC_KEY_CODE) {
+    onCloseModal();
+  }
+}
 const instance = basicLightbox.create(`
     <div class="modal">
         <p>
